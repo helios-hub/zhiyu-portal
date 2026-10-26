@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>登录 - 智遇灵搭（重庆）科技有限公司</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+  <main class="wrap">
+    <div class="auth">
+      <section class="auth-intro" aria-labelledby="intro-title">
+        <h1 id="intro-title">登录,管理你的信息</h1>
+        <p>登录后可以发布服务信息、查看浏览数据,并随时编辑或删除自己发布的内容。</p>
+        <ul>
+          <li><span class="ico" aria-hidden="true">发</span><div><b>发布信息</b><span>网站建设、宣传广告、IT外包、工商服务四大分类</span></div></li>
+          <li><span class="ico" aria-hidden="true">管</span><div><b>我的信息</b><span>在会员中心集中查看、编辑、删除</span></div></li>
+          <li><span class="ico" aria-hidden="true">数</span><div><b>浏览统计</b><span>了解每条信息被查看了多少次</span></div></li>
+        </ul>
+      </section>
+
+      <form class="panel form-card auth-card" id="form" novalidate>
+        <h2>会员登录</h2>
+        <div class="demo-box">
+          <p>没有账号?直接体验全部功能:</p>
+          <button class="btn btn-primary btn-block" type="button" id="demo">一键体验演示账号</button>
+          <p style="margin:8px 0 0">演示账号 <code>demo</code> / <code>demo12345</code>,数据仅保存在本机浏览器。</p>
+        </div>
+        <div class="divider">或使用自己的账号登录</div>
+        <div id="msg" role="alert"></div>
+        <div class="field"><label for="name">用户名</label><input id="name" autocomplete="username" required></div>
+        <div class="field"><label for="pw">密码</label><input id="pw" type="password" autocomplete="current-password" required></div>
+        <label class="check"><input type="checkbox" id="show"> 显示密码</label>
+        <button class="btn btn-block" type="submit">登录</button>
+        <p>还没有账号?<a href="register.html" style="color:var(--blue)">立即注册</a></p>
+      </form>
+    </div>
+  </main>
+  <footer id="site-footer"></footer>
+
+  <script src="static/js/data.js"></script>
+  <script src="static/js/app.js"></script>
+  <script>
+    App.layout('');
+    const next = App.safeNext(new URLSearchParams(location.search).get('next') || 'member.html');
+    if (App.me()) location.replace(next);
+
+    const msg = document.getElementById('msg');
+    const fail = (err) => { msg.className = 'msg err'; msg.textContent = err.message; };
+
+    document.getElementById('show').addEventListener('change', (e) => {
+      document.getElementById('pw').type = e.target.checked ? 'text' : 'password';
+    });
+
+    document.getElementById('form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      try {
+        await App.login(document.getElementById('name').value.trim(), document.getElementById('pw').value);
+        location.href = next;
+      } catch (err) { fail(err); }
+    });
+
+    document.getElementById('demo').addEventListener('click', async () => {
+      try {
+        await App.demoLogin();
+        location.href = next;
+      } catch (err) { fail(err); }
+    });
+  </script>
+</body>
+</html>

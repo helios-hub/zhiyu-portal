@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>发布信息 - 智遇灵搭（重庆）科技有限公司</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+  <main class="wrap">
+    <form class="panel form-card wide" id="form" novalidate>
+      <h1 id="heading">发布信息</h1>
+      <div id="msg" role="alert"></div>
+      <div class="field"><label for="cat">分类</label><select id="cat"></select></div>
+      <div class="field"><label for="title">标题</label><input id="title" maxlength="40" required>
+        <div class="hint">不超过40字,请如实描述服务内容</div></div>
+      <div class="field"><label for="content">详细说明</label><textarea id="content" maxlength="1000" required></textarea></div>
+      <div class="field"><label for="contact">联系方式</label><input id="contact" maxlength="60" required>
+        <div class="hint">会公开显示,请勿填写身份证、银行卡等敏感信息</div></div>
+      <button class="btn btn-primary" type="submit" id="submit">提交发布</button>
+    </form>
+  </main>
+  <footer id="site-footer"></footer>
+
+  <script src="static/js/data.js"></script>
+  <script src="static/js/app.js"></script>
+  <script>
+    const query = new URLSearchParams(location.search);
+    const editId = parseInt(query.get('id'), 10) || 0;
+    const u = App.me();
+    if (!u) location.replace('login.html?next=' + encodeURIComponent('post.html' + (editId ? '?id=' + editId : '')));
+    App.layout('');
+
+    const $ = (id) => document.getElementById(id);
+    const msg = $('msg');
+    const fail = (text) => { msg.className = 'msg err'; msg.textContent = text; };
+    $('cat').innerHTML = App.cats().map((c) => `<option value="${c.id}">${App.esc(c.name)}</option>`).join('');
+
+    if (u && editId) {
+      const p = App.posts().find((x) => x.id === editId);
+      if (!p || p.author !== u.name) {
+        $('form').innerHTML = '<h1>无法编辑</h1><p class="empty">信息不存在,或不是你发布的。</p><a class="btn" href="member.html">返回会员中心</a>';
+      } else {
+        document.title = '编辑信息 - 智遇灵搭（重庆）科技有限公司';
+        $('heading').textContent = '编辑信息';
+        $('submit').textContent = '保存修改';
+        $('cat').value = p.cat;
+        $('title').value = p.title;
+        $('content').value = p.content;
+        $('contact').value = p.contact;
+      }
+    }
+
+    $('form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const v = (id) => $(id).value.trim();
+      if (!v('title') || !v('content') || !v('contact')) return fail('标题、详细说明和联系方式都必须填写');
+      const fields = { cat: v('cat'), title: v('title'), content: v('content'), contact: v('contact') };
+      try {
+        if (editId) {
+          App.updatePost(editId, fields);
+          location.href = 'detail.html?id=' + editId;
+        } else {
+          location.href = 'detail.html?id=' + App.addPost({ ...fields, author: u.name });
+        }
+      } catch (err) { fail(err.message); }
+    });
+  </script>
+</body>
+</html>

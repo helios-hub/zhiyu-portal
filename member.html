@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>会员中心 - 智遇灵搭（重庆）科技有限公司</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+  <main class="wrap">
+    <div class="member-head">
+      <h1 id="hello"></h1>
+      <a class="btn btn-primary" href="post.html">发布新信息</a>
+    </div>
+    <div class="stat-row" id="stats"></div>
+
+    <section class="panel" aria-labelledby="mine-title">
+      <h2 id="mine-title" style="margin-top:0">我的信息</h2>
+      <ul class="my-list" id="mine"></ul>
+    </section>
+
+    <details class="panel pw-panel" id="pw-panel">
+      <summary>修改密码</summary>
+      <form id="pw-form" novalidate>
+        <div id="pw-msg" role="alert"></div>
+        <div class="field"><label for="old">当前密码</label><input id="old" type="password" autocomplete="current-password"></div>
+        <div class="field"><label for="new">新密码</label><input id="new" type="password" autocomplete="new-password"><div class="hint">至少8位</div></div>
+        <button class="btn" type="submit">保存新密码</button>
+      </form>
+    </details>
+  </main>
+  <footer id="site-footer"></footer>
+
+  <script src="static/js/data.js"></script>
+  <script src="static/js/app.js"></script>
+  <script>
+    const u = App.me();
+    if (!u) location.replace('login.html?next=member.html');
+    App.layout('');
+
+    function render() {
+      const mine = App.postsBy(u.name);
+      const views = mine.reduce((s, p) => s + p.views, 0);
+      document.getElementById('hello').textContent = `你好,${u.name}`;
+      document.getElementById('stats').innerHTML =
+        `<div class="stat"><b>${mine.length}</b><span>已发布信息</span></div>
+         <div class="stat"><b>${views}</b><span>累计浏览</span></div>
+         <div class="stat"><b>${mine.length ? App.esc(mine[0].date) : '-'}</b><span>最近发布</span></div>`;
+      document.getElementById('mine').innerHTML = mine.map((p) => `
+        <li class="my-item">
+          <div><div class="t">${App.esc(p.title)}</div>
+            <div class="m">${App.esc(App.catOf(p.cat).name)} · ${App.esc(p.date)} · 浏览 ${p.views}</div></div>
+          <div class="ops">
+            <a class="btn btn-sm" href="detail.html?id=${p.id}">查看</a>
+            <a class="btn btn-sm" href="post.html?id=${p.id}">编辑</a>
+            <button class="btn btn-sm btn-danger" type="button" data-del="${p.id}">删除</button>
+          </div>
+        </li>`).join('') || '<li class="empty">你还没有发布过信息,点右上角“发布新信息”开始吧。</li>';
+    }
+
+    document.getElementById('mine').addEventListener('click', (e) => {
+      const id = parseInt(e.target.dataset.del, 10);
+      if (id && confirm('确定删除这条信息吗?')) { App.removePost(id); render(); }
+    });
+
+    document.getElementById('pw-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg = document.getElementById('pw-msg');
+      try {
+        await App.changePassword(document.getElementById('old').value, document.getElementById('new').value);
+        msg.className = 'msg ok';
+        msg.textContent = '密码已更新';
+        e.target.reset();
+      } catch (err) {
+        msg.className = 'msg err';
+        msg.textContent = err.message;
+      }
+    });
+
+    if (u) render();
+  </script>
+</body>
+</html>

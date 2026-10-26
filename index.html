@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>智遇灵搭（重庆）科技有限公司 - 本地生活信息发布平台(演示)</title>
+  <meta name="description" content="智遇灵搭（重庆）科技有限公司:网站建设、宣传广告、IT外包、工商服务等本地服务信息发布与查找。演示站点。">
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>找服务,发信息,一站搞定</h1>
+        <p>网站建设、宣传广告、IT外包、工商服务,浏览本地服务商发布的信息,或免费发布你的需求。</p>
+        <a class="btn btn-primary" href="post.html">免费发布信息</a>
+        <div class="stats" id="stats"></div>
+      </div>
+      <aside class="hot" aria-labelledby="hot-title">
+        <h2 id="hot-title">热门信息</h2>
+        <ol id="hot-list"></ol>
+      </aside>
+    </div>
+  </section>
+
+  <main class="wrap" id="sections"></main>
+
+  <section class="wrap section" aria-labelledby="flow-title">
+    <div class="section-head"><h2 id="flow-title">服务流程</h2></div>
+    <div class="steps">
+      <div class="step"><div class="n">1</div>查找服务</div>
+      <div class="step"><div class="n">2</div>联系商家</div>
+      <div class="step"><div class="n">3</div>沟通需求</div>
+      <div class="step"><div class="n">4</div>确认合作</div>
+      <div class="step"><div class="n">5</div>售后反馈</div>
+    </div>
+  </section>
+
+  <footer id="site-footer"></footer>
+
+  <script src="static/js/data.js"></script>
+  <script src="static/js/app.js"></script>
+  <script>
+    App.layout('home');
+    const all = App.posts();
+    const hottest = all.slice().sort((a, b) => b.views - a.views).slice(0, 10);
+    document.getElementById('hot-list').innerHTML = hottest.map((p, i) =>
+      `<li><span class="no">${i + 1}</span><a class="t" href="detail.html?id=${p.id}">${App.esc(p.title)}</a></li>`).join('');
+    document.getElementById('stats').innerHTML =
+      `<div><b>${all.length}</b>条信息</div><div><b>${App.cats().length}</b>个分类</div>`;
+    document.getElementById('sections').innerHTML = App.cats().map((c) => {
+      const items = all.filter((p) => p.cat === c.id).slice(0, 5);
+      return `<section class="section" aria-labelledby="h-${c.id}">
+        <div class="section-head"><h2 id="h-${c.id}">${App.esc(c.name)}</h2><a href="list.html?cat=${c.id}">查看更多</a></div>
+        <div class="grid">${items.map(App.card).join('') || '<p class="empty">暂无信息</p>'}</div></section>`;
+    }).join('');
+  </script>
+</body>
+</html>

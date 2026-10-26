@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>信息详情 - 智遇灵搭（重庆）科技有限公司</title>
+  <link rel="stylesheet" href="static/css/style.css">
+</head>
+<body>
+  <header id="site-header"></header>
+  <main class="wrap" id="main"></main>
+  <footer id="site-footer"></footer>
+
+  <script src="static/js/data.js"></script>
+  <script src="static/js/app.js"></script>
+  <script>
+    const id = parseInt(new URLSearchParams(location.search).get('id'), 10);
+    const p = App.posts().find((x) => x.id === id);
+    const main = document.getElementById('main');
+    App.layout(p ? p.cat : '');
+
+    if (!p) {
+      document.title = '信息不存在 - 智遇灵搭（重庆）科技有限公司';
+      main.innerHTML = '<div class="panel empty" style="margin-top:24px">信息不存在或已被删除。<br><a class="btn" href="index.html" style="margin-top:12px">返回首页</a></div>';
+    } else {
+      App.bumpViews(id);
+      const c = App.catOf(p.cat);
+      const u = App.me();
+      document.title = `${p.title} - 智遇灵搭（重庆）科技有限公司`;
+      main.innerHTML = `
+        <div class="crumbs"><a href="index.html">首页</a> &gt; <a href="list.html?cat=${c.id}">${App.esc(c.name)}</a> &gt; 详情</div>
+        <article class="panel detail">
+          <h1>${App.esc(p.title)}</h1>
+          <div class="info"><span class="tag">${App.esc(c.name)}</span><span>发布者:${App.esc(p.author)}</span><span>日期:${App.esc(p.date)}</span><span>浏览:${p.views + 1}</span></div>
+          <div class="content">${App.esc(p.content)}</div>
+          <div class="contact-box"><b>联系方式:</b>${App.esc(p.contact)}</div>
+          ${u && u.name === p.author ? '<p><button class="btn btn-danger" id="del" type="button">删除这条信息</button></p>' : ''}
+        </article>`;
+      const del = document.getElementById('del');
+      if (del) del.addEventListener('click', () => {
+        if (confirm('确定删除这条信息吗?')) { App.removePost(id); location.href = 'index.html'; }
+      });
+    }
+  </script>
+</body>
+</html>
