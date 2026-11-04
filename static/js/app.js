@@ -68,7 +68,7 @@
       const salt = hex(crypto.getRandomValues(new Uint8Array(16)));
       users.push({ name: DEMO.name, salt, hash: await hash(DEMO.pw, salt) });
       save(KEY_USERS, users);
-      DEMO_POSTS.forEach((p) => addPost({ ...p, author: DEMO.name, contact: 'demo@example.com' }));
+      DEMO_POSTS.forEach((p) => addPost({ ...p, author: DEMO.name, contact: '电话:400-000-0001(演示数据)' }));
     }
     save(KEY_SESSION, { name: DEMO.name });
   }
@@ -114,6 +114,7 @@
       <div class="footer"><div class="wrap">
         <div>${cats().map((c) => `<a href="list.html?cat=${c.id}">${esc(c.name)}</a>`).join('')}<a href="charge.html">收费说明</a></div>
         <p>© ${new Date().getFullYear()} ${SITE} 演示项目。本站为学习用途的前端原型,所有商家与信息均为虚构,不提供真实交易。</p>
+        <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">渝ICP备2026019832号-2</a></p>
       </div></div>`;
     const out = document.getElementById('logout');
     if (out) out.addEventListener('click', (e) => { e.preventDefault(); logout(); location.reload(); });
