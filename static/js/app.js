@@ -5,9 +5,9 @@
   const SITE = '智遇灵搭（重庆）科技有限公司';
   const DEMO = { name: 'demo', pw: 'demo12345' };
   const DEMO_POSTS = [
-    { cat: 'web', title: '【示例】企业官网建设,含小程序联动', content: '这是演示账号预置的示例信息,你可以在会员中心编辑或删除它。' },
-    { cat: 'ad', title: '【示例】社区广告位招商', content: '这是演示账号预置的示例信息,你可以在会员中心编辑或删除它。' },
-    { cat: 'it', title: '【示例】中小企业IT运维外包', content: '这是演示账号预置的示例信息,你可以在会员中心编辑或删除它。' }
+    { cat: 'web', title: '企业官网建设,含小程序联动', content: '提供企业官网定制与小程序联动开发,一站式交付。你可以在会员中心编辑或删除它。' },
+    { cat: 'ad', title: '社区广告位招商', content: '社区电梯、门禁、灯箱广告位招商,点位可选。你可以在会员中心编辑或删除它。' },
+    { cat: 'it', title: '中小企业IT运维外包', content: '提供远程与上门运维、资产盘点等IT外包服务。你可以在会员中心编辑或删除它。' }
   ];
 
   const load = (k, d) => { try { return JSON.parse(localStorage.getItem(k)) ?? d; } catch (e) { return d; } };
@@ -68,7 +68,7 @@
       const salt = hex(crypto.getRandomValues(new Uint8Array(16)));
       users.push({ name: DEMO.name, salt, hash: await hash(DEMO.pw, salt) });
       save(KEY_USERS, users);
-      DEMO_POSTS.forEach((p) => addPost({ ...p, author: DEMO.name, contact: '电话:400-000-0001(演示数据)' }));
+      DEMO_POSTS.forEach((p) => addPost({ ...p, author: DEMO.name, contact: '电话:400-000-0001' }));
     }
     save(KEY_SESSION, { name: DEMO.name });
   }
@@ -103,7 +103,7 @@
       .concat([['charge.html', '收费说明', 'charge']])
       .map(([href, label, key]) => `<li><a href="${href}" class="${key === active ? 'active' : ''}">${esc(label)}</a></li>`).join('');
     document.getElementById('site-header').innerHTML = `
-      <div class="topbar"><div class="wrap"><span>欢迎来到${SITE}(演示站点,数据仅保存在本机浏览器)</span>
+      <div class="topbar"><div class="wrap"><span></span>
         <span>${u ? `你好,${esc(u.name)}<a href="#" id="logout">退出</a>` : '<a href="login.html">登录</a><a href="register.html">注册</a>'}</span></div></div>
       <div class="header"><div class="wrap">
         <a class="logo" href="index.html">${SITE}<small>本地生活信息发布</small></a>
@@ -113,7 +113,7 @@
     document.getElementById('site-footer').innerHTML = `
       <div class="footer"><div class="wrap">
         <div>${cats().map((c) => `<a href="list.html?cat=${c.id}">${esc(c.name)}</a>`).join('')}<a href="charge.html">收费说明</a></div>
-        <p>© ${new Date().getFullYear()} ${SITE} 演示项目。本站为学习用途的前端原型,所有商家与信息均为虚构,不提供真实交易。</p>
+        <p>© ${new Date().getFullYear()} ${SITE} 版权所有</p>
         <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">渝ICP备2026019832号-2</a></p>
       </div></div>`;
     const out = document.getElementById('logout');
