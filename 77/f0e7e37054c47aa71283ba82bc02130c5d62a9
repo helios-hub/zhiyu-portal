@@ -1,0 +1,43 @@
+charge.html
+  s_c79df03d1b28b9::t_cb958cf848ae7c 15
+  s_c79df03d1b28b9::t_40807bdebef6d1 29-30
+post.html
+  s_c79df03d1b28b9::t_40807bdebef6d1 26-27
+  s_c79df03d1b28b9::t_7feb140edf2237 19
+static/js/data.js
+  s_c79df03d1b28b9::t_7feb140edf2237 9-24
+login.html
+  s_c79df03d1b28b9::t_90e9d24409869c 27-28
+  s_c79df03d1b28b9::t_40807bdebef6d1 42-43
+register.html
+  s_c79df03d1b28b9::t_40807bdebef6d1 26-27
+list.html
+  s_c79df03d1b28b9::t_40807bdebef6d1 19-20
+detail.html
+  s_c79df03d1b28b9::t_40807bdebef6d1 14-15
+index.html
+  s_c79df03d1b28b9::t_0341baf080cb89 6-7
+  s_c79df03d1b28b9::t_40807bdebef6d1 43-44
+static/js/app.js
+  s_c79df03d1b28b9::t_8afc1e811f3efd 8-10
+  s_c79df03d1b28b9::t_7feb140edf2237 71,116
+  s_c79df03d1b28b9::t_b59e5ef1b549a4 106
+member.html
+  s_c79df03d1b28b9::t_40807bdebef6d1 35-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "77f0e7e37054c47aa71283ba82bc02130c5d62a9",
+  "prompts": {},
+  "sessions": {
+    "s_c79df03d1b28b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "db554d7f-79b9-46c1-8bcc-69a776f37f76",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "LEO <17409473+leoetodao@user.noreply.gitee.com>"
+    }
+  }
+}
