@@ -1,0 +1,22 @@
+static/js/data.js
+  s_c79df03d1b28b9::t_82a7fafaccd714 9-24
+static/js/app.js
+  s_c79df03d1b28b9::t_a0808bd25ebc21 71
+  s_c79df03d1b28b9::t_5d6bb8b34e417e 117
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.51-trip",
+  "base_commit_sha": "7d1c4c2b52f5cb1810ea37de0b435386ea9b85f7",
+  "prompts": {},
+  "sessions": {
+    "s_c79df03d1b28b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "db554d7f-79b9-46c1-8bcc-69a776f37f76",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "LEO <17409473+leoetodao@user.noreply.gitee.com>"
+    }
+  }
+}
