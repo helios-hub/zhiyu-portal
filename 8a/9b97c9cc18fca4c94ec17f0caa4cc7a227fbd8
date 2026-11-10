@@ -1,0 +1,19 @@
+static/js/app.js
+  s_c79df03d1b28b9::t_ee51fa05089205 118-119
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "8a9b97c9cc18fca4c94ec17f0caa4cc7a227fbd8",
+  "prompts": {},
+  "sessions": {
+    "s_c79df03d1b28b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "db554d7f-79b9-46c1-8bcc-69a776f37f76",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "LEO <17409473+leoetodao@user.noreply.gitee.com>"
+    }
+  }
+}
