@@ -115,6 +115,8 @@
         <div>${cats().map((c) => `<a href="list.html?cat=${c.id}">${esc(c.name)}</a>`).join('')}<a href="charge.html">收费说明</a></div>
         <p>© ${new Date().getFullYear()} ${SITE} 版权所有</p>
         <p><a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">渝ICP备2026019832号-2</a></p>
+        <p>公司地址：重庆市两江新区大竹林街道卉竹路2号7幢9层9050</p>
+        <p>联系方式：13164569379</p>
       </div></div>`;
     const out = document.getElementById('logout');
     if (out) out.addEventListener('click', (e) => { e.preventDefault(); logout(); location.reload(); });
