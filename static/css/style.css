@@ -147,6 +147,24 @@ table.fees th { background: #f2f4f7; }
 .pw-panel summary { cursor: pointer; font-weight: 600; font-size: 18px; }
 .pw-panel form { margin-top: 14px; max-width: 400px; }
 
+/* membership */
+.membership-intro { margin: 0 0 22px; color: var(--muted); }
+.membership-intro ul { margin: 10px 0 0; padding-left: 20px; }
+.fees .plan-action { white-space: nowrap; }
+.fees .plan-action .btn { padding: 6px 12px; font-size: 14px; }
+.pay-modal[hidden] { display: none; }
+.pay-modal { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; padding: 20px; background: rgba(16, 24, 40, .62); }
+.pay-dialog { width: min(420px, 100%); padding: 28px; background: #fff; border-radius: 12px; box-shadow: 0 18px 48px rgba(16, 24, 40, .28); position: relative; text-align: center; }
+.pay-close { position: absolute; top: 10px; right: 12px; width: 32px; height: 32px; border: 0; border-radius: 50%; background: transparent; color: #667085; cursor: pointer; font-size: 24px; line-height: 1; }
+.pay-close:hover { background: #f2f4f7; color: var(--text); }
+.pay-dialog h2 { margin: 0 28px 8px; font-size: 22px; }
+.pay-plan { margin: 0; color: var(--muted); }
+.pay-amount { margin: 8px 0 16px; font-size: 30px; font-weight: 700; color: var(--orange); }
+.pay-qr { width: 196px; height: 196px; display: block; margin: 0 auto 12px; border: 8px solid #1677ff; border-radius: 8px; }
+.pay-caption { margin: 0 0 14px; color: #1677ff; font-weight: 600; }
+.pay-notice { margin: 0 0 16px; padding: 10px 12px; border-radius: var(--radius); background: #fff8eb; color: #7a2e0e; text-align: left; font-size: 14px; }
+.pay-actions { display: flex; gap: 10px; justify-content: center; }
+
 /* footer */
 .footer { background: #101828; color: #98a2b3; margin-top: 40px; padding: 28px 0; font-size: 14px; }
 .footer a { color: #d0d5dd; margin-right: 14px; }

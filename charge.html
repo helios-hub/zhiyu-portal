@@ -3,31 +3,95 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>收费说明 - 智遇灵搭（重庆）科技有限公司</title>
-  <link rel="stylesheet" href="static/css/style.css">
+  <title>会员服务 - 智遇灵搭（重庆）科技有限公司</title>
+  <link rel="stylesheet" href="static/css/style.css?v=1794301296">
 </head>
 <body>
   <header id="site-header"></header>
   <main class="wrap">
-    <div class="crumbs"><a href="index.html">首页</a> &gt; 收费说明</div>
+    <div class="crumbs"><a href="index.html">首页</a> &gt; 会员服务</div>
     <section class="panel">
-      <h1>收费说明</h1>
-      <p>以下为发布套餐,具体费用请以实际沟通为准。</p>
+      <h1>会员服务</h1>
+      <div class="membership-intro">
+        <p>开通会员后，可获得信息展示与推广服务。</p>
+        <ul>
+          <li>分类列表展示</li>
+          <li>首页分类区推荐</li>
+          <li>首页热门与分类置顶展示</li>
+        </ul>
+      </div>
       <table class="fees">
-        <caption class="empty" style="padding:0 0 8px;text-align:left">发布套餐对比</caption>
-        <thead><tr><th scope="col">套餐</th><th scope="col">有效期</th><th scope="col">展示位置</th><th scope="col">价格(示例)</th></tr></thead>
+        <caption class="empty" style="padding:0 0 8px;text-align:left">会员套餐对比</caption>
+        <thead><tr><th scope="col">套餐</th><th scope="col">有效期</th><th scope="col">展示位置</th><th scope="col">价格</th><th scope="col">操作</th></tr></thead>
         <tbody>
-          <tr><th scope="row">基础版</th><td>30天</td><td>分类列表</td><td>免费</td></tr>
-          <tr><th scope="row">推荐版</th><td>90天</td><td>分类列表 + 首页分类区</td><td>¥99</td></tr>
-          <tr><th scope="row">置顶版</th><td>180天</td><td>首页热门 + 分类置顶</td><td>¥299</td></tr>
+          <tr><th scope="row">基础版</th><td>30天</td><td>分类列表</td><td>免费</td><td class="plan-action">当前可用</td></tr>
+          <tr><th scope="row">推荐会员</th><td>90天</td><td>分类列表 + 首页分类区</td><td>¥99</td><td class="plan-action"><button class="btn btn-primary" type="button" data-plan="recommended">立即开通</button></td></tr>
+          <tr><th scope="row">置顶会员</th><td>180天</td><td>首页热门 + 分类置顶</td><td>¥299</td><td class="plan-action"><button class="btn btn-primary" type="button" data-plan="featured">立即开通</button></td></tr>
         </tbody>
       </table>
     </section>
   </main>
   <footer id="site-footer"></footer>
 
-  <script src="static/js/data.js?v=1793785737"></script>
-  <script src="static/js/app.js?v=1793785737"></script>
-  <script>App.layout('charge');</script>
+  <div class="pay-modal" id="pay-modal" hidden aria-hidden="true">
+    <section class="pay-dialog" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+      <button class="pay-close" type="button" aria-label="关闭支付窗口">×</button>
+      <h2 id="pay-title">支付宝扫码支付</h2>
+      <p class="pay-plan" id="pay-plan"></p>
+      <p class="pay-amount" id="pay-amount"></p>
+      <img class="pay-qr" src="static/picture/payment-demo-qr.svg" alt="不可用于支付的演示二维码">
+      <p class="pay-caption">请使用支付宝扫码支付</p>
+      <p class="pay-notice">支付演示：当前网站暂未接入真实支付。二维码不会产生扣款，也不会自动开通会员。</p>
+      <div class="pay-actions">
+        <button class="btn" type="button" id="paid">我已完成支付</button>
+        <button class="btn btn-primary" type="button" id="close-pay">关闭</button>
+      </div>
+    </section>
+  </div>
+
+  <script src="static/js/data.js?v=1794301296"></script>
+  <script src="static/js/app.js?v=1794301296"></script>
+  <script>
+    const plans = {
+      recommended: { name: '推荐会员', duration: '90天', price: '¥99.00' },
+      featured: { name: '置顶会员', duration: '180天', price: '¥299.00' }
+    };
+    const modal = document.getElementById('pay-modal');
+    let previousFocus;
+    App.layout('charge');
+
+    function openPayment(planId) {
+      const plan = plans[planId];
+      if (!plan) return;
+      if (!App.me()) {
+        location.href = 'login.html?next=' + encodeURIComponent('charge.html?plan=' + planId);
+        return;
+      }
+      previousFocus = document.activeElement;
+      document.getElementById('pay-plan').textContent = `${plan.name} · 有效期${plan.duration}`;
+      document.getElementById('pay-amount').textContent = plan.price;
+      modal.hidden = false;
+      modal.setAttribute('aria-hidden', 'false');
+      modal.querySelector('.pay-close').focus();
+    }
+
+    function closePayment() {
+      modal.hidden = true;
+      modal.setAttribute('aria-hidden', 'true');
+      previousFocus?.focus();
+    }
+
+    document.querySelectorAll('[data-plan]').forEach((button) => {
+      button.addEventListener('click', () => openPayment(button.dataset.plan));
+    });
+    document.getElementById('close-pay').addEventListener('click', closePayment);
+    modal.querySelector('.pay-close').addEventListener('click', closePayment);
+    modal.addEventListener('click', (event) => { if (event.target === modal) closePayment(); });
+    document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modal.hidden) closePayment(); });
+    document.getElementById('paid').addEventListener('click', () => alert('当前为支付流程演示，会员状态不会发生变化。'));
+
+    const planId = new URLSearchParams(location.search).get('plan');
+    if (plans[planId] && App.me()) openPayment(planId);
+  </script>
 </body>
 </html>

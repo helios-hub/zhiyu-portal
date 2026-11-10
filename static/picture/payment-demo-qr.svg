@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 196 196" role="img" aria-labelledby="title desc">
+  <title id="title">支付演示二维码</title>
+  <desc id="desc">不可用于支付的演示图案</desc>
+  <rect width="196" height="196" fill="#fff"/>
+  <g fill="#1677ff">
+    <path d="M12 12h44v44H12zM20 20v28h28V20zM28 28h12v12H28zM140 12h44v44h-44zM148 20v28h28V20zM156 28h12v12h-12zM12 140h44v44H12zM20 148v28h28v-28zM28 156h12v12H28z"/>
+    <path d="M70 16h12v12H70zm18 0h12v12H88zm18 0h12v12h-12zm10 18h12v12h-12zM70 38h12v12H70zm20 0h12v12H90zm20 0h12v12h-12zM66 66h12v12H66zm18 0h12v12H84zm18 0h12v12h-12zm18 0h12v12h-12zm18 0h12v12h-12zM70 86h12v12H70zm38 0h12v12h-12zm18 0h12v12h-12zM66 106h12v12H66zm18 0h12v12H84zm18 0h12v12h-12zm36 0h12v12h-12zM70 126h12v12H70zm20 0h12v12H90zm20 0h12v12h-12zm18 0h12v12h-12zm-38 22h12v12H90zm20 0h12v12h-12zm20 0h12v12h-12zm18 0h12v12h-12zM70 166h12v12H70zm18 0h12v12H88zm38 0h12v12h-12z"/>
+  </g>
+  <rect x="53" y="76" width="90" height="44" rx="6" fill="#fff" stroke="#1677ff" stroke-width="3"/>
+  <text x="98" y="103" text-anchor="middle" font-family="sans-serif" font-size="14" font-weight="700" fill="#1677ff">支付演示</text>
+</svg>
