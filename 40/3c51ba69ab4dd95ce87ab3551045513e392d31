@@ -1,0 +1,39 @@
+index.html
+  s_c79df03d1b28b9::t_58b65c02bfc915 8,43-44
+static/css/style.css
+  s_c79df03d1b28b9::t_6e088ad41d18b6 150-167
+login.html
+  s_c79df03d1b28b9::t_58b65c02bfc915 7,42-43
+detail.html
+  s_c79df03d1b28b9::t_58b65c02bfc915 7,14-15
+charge.html
+  s_c79df03d1b28b9::t_58b65c02bfc915 7,52-53
+  s_c79df03d1b28b9::t_be623a6a4fce24 6,12,14-22,24-25,27-29,36-51,54-95
+static/picture/payment-demo-qr.svg
+  s_c79df03d1b28b9::t_5732ac05e12366 1-11
+member.html
+  s_c79df03d1b28b9::t_0a4a21fdb53439 18-24
+  s_c79df03d1b28b9::t_58b65c02bfc915 7,42-43
+list.html
+  s_c79df03d1b28b9::t_58b65c02bfc915 7,19-20
+post.html
+  s_c79df03d1b28b9::t_58b65c02bfc915 7,26-27
+register.html
+  s_c79df03d1b28b9::t_58b65c02bfc915 7,26-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.52-trip",
+  "base_commit_sha": "403c51ba69ab4dd95ce87ab3551045513e392d31",
+  "prompts": {},
+  "sessions": {
+    "s_c79df03d1b28b9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "db554d7f-79b9-46c1-8bcc-69a776f37f76",
+        "model": "gpt-5.6-terra"
+      },
+      "human_author": "LEO <17409473+leoetodao@user.noreply.gitee.com>"
+    }
+  }
+}
